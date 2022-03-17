@@ -10,7 +10,6 @@
 
         private Node first;
         private Node last;
-        public int Length { get; set; } = 0;
 
         /// <summary>
         ///     Adds the elements to the end of the list (O(1))
@@ -23,7 +22,6 @@
             var temp = first;
             first = node;
             first.Next = temp;
-            Length++;
         }
 
         /// <summary>
@@ -36,9 +34,7 @@
             Initializer(node);
             last.Next = node;
             last = node;
-            Length++;
         }
-
 
         /// <summary>
         ///  returns the indexOf the item
@@ -53,23 +49,30 @@
         {
             if (IsEmpty()) return -1;
             var node = first;
-            for (int i = 0; i < Length; i++)
+            int index = 0;
+            while (node!=null)
             {
-                if (node.Value.Equals(value))
+                if(node.Value.Equals(value))
                 {
-                    return i;
+                    return index;
                 }
+                index++;
                 node = node.Next;
-                if (node == null)
-                {
-                    return -1;
-                }
-                if (node.Value.Equals(value))
-                {
-                    return ++i;
-                }
             }
             return -1;
+        }
+
+        public bool Contains(T value)
+        {
+            if (IsEmpty())
+            {
+                return false;
+            }
+            if(IndexOf(value)==-1)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -81,7 +84,6 @@
             if (IsEmpty())
             {
                 first = last = node;
-                Length++;
             }
         }
 
