@@ -143,6 +143,7 @@ namespace DataStructures.LinkedList
 
         /// <summary>
         ///  Reverses the linkedList
+        ///  Interview Question
         /// </summary>
         public void Reverse()
         {
@@ -163,6 +164,14 @@ namespace DataStructures.LinkedList
             first = previous;
         }
 
+        /// <summary>
+        ///     Gets the Kth element from the end
+        ///     Interview Question
+        /// </summary>
+        /// <param name="kth"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public T GetKthFromTheEnd(int kth)
         {
             if (IsEmpty())
