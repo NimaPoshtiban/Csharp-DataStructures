@@ -18,10 +18,15 @@
         public void AddFirst(T value)
         {
             var node = new Node() { Value = value };
-            Initializer(node);
-            var temp = first;
-            first = node;
-            first.Next = temp;
+            if (IsEmpty())
+            {
+                first = last = node;
+            }
+            else
+            {
+                node.Next = first;
+                first = node;
+            }
         }
 
         /// <summary>
@@ -31,9 +36,15 @@
         public void AddLast(T value)
         {
             var node = new Node() { Value = value };
-            Initializer(node);
-            last.Next = node;
-            last = node;
+            if (IsEmpty())
+            {
+                first = last = node;
+            }
+            else
+            {
+                last.Next = node;
+                last = node;
+            }
         }
 
         /// <summary>
@@ -48,45 +59,51 @@
         public int IndexOf(T value)
         {
             if (IsEmpty()) return -1;
-            var node = first;
+            var current = first;
             int index = 0;
-            while (node!=null)
+            while (current != null)
             {
-                if(node.Value.Equals(value))
+                if (current.Value.Equals(value))
                 {
                     return index;
                 }
+                current = current.Next;
                 index++;
-                node = node.Next;
             }
             return -1;
         }
-
+        /// <summary>
+        ///  check to see if the element exists in the list (O(n))
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Contains(T value)
         {
             if (IsEmpty())
             {
                 return false;
             }
-            if(IndexOf(value)==-1)
+            if (IndexOf(value) == -1)
             {
                 return false;
             }
             return true;
         }
 
-        /// <summary>
-        ///     Initilizes the list when it's empty
-        /// </summary>
-        /// <param name="node"></param>
-        private void Initializer(Node node)
+        public void RemoveFirst()
         {
             if (IsEmpty())
             {
-                first = last = node;
+                throw new Exception("List is empty");
             }
+            if (first == last)
+            {
+                first = last = null;
+            }
+            var node = first.Next;
+            first.Next = null;
+            first = node;
         }
-
         /// <summary>
         ///  check to see if the list is empty
         /// </summary>
