@@ -2,11 +2,11 @@
 
 namespace DataStructures.Stack
 {
-    public class StackArray<T>
+    public class ArrayStack<T>
     {
         private readonly int _size;
         private T[] _array;
-        public StackArray(int size)
+        public ArrayStack(int size)
         {
             _size = size;
             _array = new T[size];
